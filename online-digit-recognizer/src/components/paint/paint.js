@@ -11,11 +11,11 @@ class Paint extends Component {
     handleClick(e) {
         const target = e.target;
 
-        if (target.style.background === "black" || target.style.background === "") {
-            target.style.background = "white";
+        if (target.className === "table-header black") {
+            target.className = "table-header white";
         }
         else {
-            e.target.style.background = "black";
+            target.className = "table-header black";
         }
     }
 
@@ -24,7 +24,7 @@ class Paint extends Component {
         const tableSize = Math.pow(tableLength, 2);
 
         for (let i = 0; i < tableSize; i++) {
-            headers.push(React.createElement("th", { key: i, className: "table-header", id: i, onClick: this.handleClick }));
+            headers.push(React.createElement("th", { key: i, className: "table-header black", id: i, onClick: this.handleClick }));
         }
 
         const rows = [];
