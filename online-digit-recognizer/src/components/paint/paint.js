@@ -5,6 +5,7 @@ class Paint extends Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.setupTable = this.setupTable.bind(this);
     }
 
     handleClick(e) {
@@ -18,28 +19,28 @@ class Paint extends Component {
         }
     }
 
+    setupTable(tableLength) {
+        let headers = [];
+        const tableSize = Math.pow(tableLength, 2);
+
+        for (let i = 0; i < tableSize; i++) {
+            headers.push(React.createElement("th", { key: i, className: "table-header", id: i, onClick: this.handleClick }));
+        }
+
+        const rows = [];
+
+        for (let i = 0; i < tableLength; i++) {
+            rows.push(React.createElement("tr", { key: i, className: "table-row" }, headers.slice(i * tableLength, (i + 1) * tableLength)));
+        }
+
+        const tbody = React.createElement("tbody", { id: "table-body" }, rows);
+        const table = React.createElement("table", { id: "table-main" }, tbody);
+
+        return table;
+    }
+
     render() {
-        return (
-            <table className="image">
-                <tbody>
-                    <tr className="table-row" >
-                        <th id="0" className="table-header" onClick={this.handleClick} />
-                        <th id="1" className="table-header" onClick={this.handleClick} />
-                        <th id="2" className="table-header" onClick={this.handleClick} />
-                    </tr>
-                    <tr className="table-row" >
-                        <th id="5" className="table-header" onClick={this.handleClick} />
-                        <th id="6" className="table-header" onClick={this.handleClick} />
-                        <th id="7" className="table-header" onClick={this.handleClick} />
-                    </tr>
-                    <tr className="table-row" >
-                        <th id="10" className="table-header" onClick={this.handleClick} />
-                        <th id="11" className="table-header" onClick={this.handleClick} />
-                        <th id="12" className="table-header" onClick={this.handleClick} />
-                    </tr>
-                </tbody>
-            </table>
-        );
+        return this.setupTable(14);
     }
 }
 
